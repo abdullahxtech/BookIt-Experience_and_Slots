@@ -121,14 +121,14 @@ This project is designed to deploy directly to **Vercel**:
 
 ---
 
-## 📷 Screenshots
+## Pages
 
-| Page                  | Preview                                      |
-| --------------------- | -------------------------------------------- |
-| 🏠 Home               | ![Home Page](./public/screenshots/homepage.png)         |
-| 📄 Experience Details | ![Details Page](./public/screenshots/DetailsPage.png)   |
-| 💳 Checkout           | ![Checkout Page](./public/screenshots/checkout.png) |
-| ✅ Success             | ![Success Page](./public/screenshots/result.png)   |
+|                   | 
+| --------------------- | 
+| 🏠 Home               | 
+| 📄 Experience Details | 
+| 💳 Checkout           | 
+| ✅ Success             | 
 
 ---
 
