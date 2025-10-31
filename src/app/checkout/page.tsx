@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { IExperience } from "@/types";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -159,157 +159,165 @@ const CheckoutPage = () => {
   }
 
   return (
-    <section className="">
-      {/* Back + title */}
-      <div
-        className="h-5 w-[93px] relative top-6 md:left-[150px] left-8 flex gap-2 items-center text-[#000000]"
-        onClick={() => router.back()}
-      >
-        <span className="w-5 h-5 ">
-          {" "}
-          <FaArrowLeft />
-        </span>
-        <span className="w-[65px] h-[18px] font-medium text-[14px] leading-[18px]">
-          Checkout
-        </span>
-      </div>
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center h-screen">
+          Loading checkout...
+        </div>
+      }
+    >
+      <section className="">
+        {/* Back + title */}
+        <div
+          className="h-5 w-[93px] relative top-6 md:left-[150px] left-8 flex gap-2 items-center text-[#000000]"
+          onClick={() => router.back()}
+        >
+          <span className="w-5 h-5 ">
+            {" "}
+            <FaArrowLeft />
+          </span>
+          <span className="w-[65px] h-[18px] font-medium text-[14px] leading-[18px]">
+            Checkout
+          </span>
+        </div>
 
-      <div className="flex md:flex-row flex-col md:gap-0 gap-5 mt-[68px] justify-between md:mx-[150px] px-3 mb-10 md:px-0 md:mb-0">
-        {/* Left Form Section */}
-        <div className="md:w-[739px] md:h-[198px] rounded-xl px-6 py-5 bg-[#EFEFEF] flex flex-col">
-          <div className="flex md:flex-row flex-col md:w-[691px] m-auto md:h-[68px] gap-6">
-            <div className="flex flex-col md:w-[333.5px] w-full h-[68px] gap-2">
-              <label className="text-[#5B5B5B] md:w-[333.5px] h-[18px] font-normal text-[14px]">
-                Full name
-              </label>
+        <div className="flex md:flex-row flex-col md:gap-0 gap-5 mt-[68px] justify-between md:mx-[150px] px-3 mb-10 md:px-0 md:mb-0">
+          {/* Left Form Section */}
+          <div className="md:w-[739px] md:h-[198px] rounded-xl px-6 py-5 bg-[#EFEFEF] flex flex-col">
+            <div className="flex md:flex-row flex-col md:w-[691px] m-auto md:h-[68px] gap-6">
+              <div className="flex flex-col md:w-[333.5px] w-full h-[68px] gap-2">
+                <label className="text-[#5B5B5B] md:w-[333.5px] h-[18px] font-normal text-[14px]">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="bg-[#DDDDDD] md:w-[333.5px] w-[85vw] h-[42px] rounded-md px-4 py-3 font-normal text-[14px] leading-[18px] text-[#727272]"
+                />
+              </div>
+              <div className="flex flex-col md:w-[333.5px] w-full h-[68px] gap-2">
+                <label className="text-[#5B5B5B] md:w-[333.5px] h-[18px] font-normal text-[14px]">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  className="bg-[#DDDDDD] md:w-[333.5px] w-[85vw] h-[42px] rounded-md px-4 py-3 font-normal text-[14px] leading-[18px] text-[#727272]"
+                />
+              </div>
+            </div>
+
+            <div className="md:w-[691px] w-[85vw] h-[42px] flex md:gap-4 justify-between mx-auto md:mx-0 mt-3 md:mt-0">
               <input
                 type="text"
-                placeholder="Your name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                className="bg-[#DDDDDD] md:w-[333.5px] w-[85vw] h-[42px] rounded-md px-4 py-3 font-normal text-[14px] leading-[18px] text-[#727272]"
+                placeholder="Enter promo code"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                className="md:w-[604px] h-[42px] rounded-md py-3 px-4 bg-[#DDDDDD] text-[14px] font-normal leading-[18px] text-[#727272]"
               />
+              <button
+                onClick={handleApplyPromo}
+                className="w-[71px] h-[42px] rounded-lg px-4 py-3 bg-[#161616] font-medium text-[14px] leading-[18px] text-[#F9F9F9]"
+              >
+                Apply
+              </button>
             </div>
-            <div className="flex flex-col md:w-[333.5px] w-full h-[68px] gap-2">
-              <label className="text-[#5B5B5B] md:w-[333.5px] h-[18px] font-normal text-[14px]">
-                Email
-              </label>
+
+            <div className="w-fit h-4 flex gap-2 mt-2">
               <input
-                type="email"
-                placeholder="Your email"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-                className="bg-[#DDDDDD] md:w-[333.5px] w-[85vw] h-[42px] rounded-md px-4 py-3 font-normal text-[14px] leading-[18px] text-[#727272]"
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="w-4 h-4"
               />
+              <span className="w-fit h-4 font-normal text-[12px] leading-4 text-[#5B5B5B]">
+                I agree to the terms and safety policy
+              </span>
             </div>
           </div>
 
-          <div className="md:w-[691px] w-[85vw] h-[42px] flex md:gap-4 justify-between mx-auto md:mx-0 mt-3 md:mt-0">
-            <input
-              type="text"
-              placeholder="Enter promo code"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value)}
-              className="md:w-[604px] h-[42px] rounded-md py-3 px-4 bg-[#DDDDDD] text-[14px] font-normal leading-[18px] text-[#727272]"
-            />
+          {/* Right Summary Section */}
+          <div className="w-[387px] p-6 flex flex-col gap-6 rounded-xl bg-[#EFEFEF]">
+            <div className="h-[209px] w-[339px] grid grid-cols-2 gap-y-2.5 text-sm">
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Experience
+              </span>
+              <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#161616]">
+                {experience.title}
+              </span>
+
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Date
+              </span>
+              <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                {finalDate}
+              </span>
+
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Time
+              </span>
+              <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                {time}
+              </span>
+
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Qty
+              </span>
+              <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                {qty}
+              </span>
+
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Subtotal
+              </span>
+              <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#161616]">
+                ₹{subtotal}
+              </span>
+
+              {discount > 0 && (
+                <>
+                  <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                    Discount
+                  </span>
+                  <span className="text-[#16A34A] w-[170px] text-right h-5 font-normal text-[16px] leading-5">
+                    -₹{discountAmount}
+                  </span>
+                </>
+              )}
+
+              <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
+                Taxes
+              </span>
+              <span className="w-[170px] text-right text-[#161616] h-5 font-normal text-[16px] leading-5">
+                ₹{taxes}
+              </span>
+            </div>
+
+            <hr className="w-[339px] h-px border-[#D9D9D9]" />
+
+            <div className="h-6 w-[339px] flex justify-between">
+              <span className="w-12 h-6 font-medium text-[20px] leading-6 text-[#161616]">
+                Total
+              </span>
+              <span className="w-[49px] h-6 font-medium text-[20px] leading-6 text-[#161616]">
+                ₹{total}
+              </span>
+            </div>
+
             <button
-              onClick={handleApplyPromo}
-              className="w-[71px] h-[42px] rounded-lg px-4 py-3 bg-[#161616] font-medium text-[14px] leading-[18px] text-[#F9F9F9]"
+              onClick={handleConfirm}
+              className="w-[339px] h-11 rounded-lg px-5 py-3 bg-[#FFD643]"
             >
-              Apply
+              Pay and Confirm
             </button>
           </div>
-
-          <div className="w-fit h-4 flex gap-2 mt-2">
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="w-4 h-4"
-            />
-            <span className="w-fit h-4 font-normal text-[12px] leading-4 text-[#5B5B5B]">
-              I agree to the terms and safety policy
-            </span>
-          </div>
         </div>
-
-        {/* Right Summary Section */}
-        <div className="w-[387px] p-6 flex flex-col gap-6 rounded-xl bg-[#EFEFEF]">
-          <div className="h-[209px] w-[339px] grid grid-cols-2 gap-y-2.5 text-sm">
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Experience
-            </span>
-            <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#161616]">
-              {experience.title}
-            </span>
-
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Date
-            </span>
-            <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              {finalDate}
-            </span>
-
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Time
-            </span>
-            <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              {time}
-            </span>
-
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Qty
-            </span>
-            <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              {qty}
-            </span>
-
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Subtotal
-            </span>
-            <span className="w-[170px] text-right h-5 font-normal text-[16px] leading-5 text-[#161616]">
-              ₹{subtotal}
-            </span>
-
-            {discount > 0 && (
-              <>
-                <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-                  Discount
-                </span>
-                <span className="text-[#16A34A] w-[170px] text-right h-5 font-normal text-[16px] leading-5">
-                  -₹{discountAmount}
-                </span>
-              </>
-            )}
-
-            <span className="w-fit h-5 font-normal text-[16px] leading-5 text-[#656565]">
-              Taxes
-            </span>
-            <span className="w-[170px] text-right text-[#161616] h-5 font-normal text-[16px] leading-5">
-              ₹{taxes}
-            </span>
-          </div>
-
-          <hr className="w-[339px] h-px border-[#D9D9D9]" />
-
-          <div className="h-6 w-[339px] flex justify-between">
-            <span className="w-12 h-6 font-medium text-[20px] leading-6 text-[#161616]">
-              Total
-            </span>
-            <span className="w-[49px] h-6 font-medium text-[20px] leading-6 text-[#161616]">
-              ₹{total}
-            </span>
-          </div>
-
-          <button
-            onClick={handleConfirm}
-            className="w-[339px] h-11 rounded-lg px-5 py-3 bg-[#FFD643]"
-          >
-            Pay and Confirm
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </Suspense>
   );
 };
 

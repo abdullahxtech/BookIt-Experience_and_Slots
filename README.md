@@ -1,101 +1,153 @@
-BookIt: Experiences & Slots - Fullstack Intern Assignment
+# 🌍 BookIt: Experiences & Slots
 
-This is a complete full-stack web application built for a hiring assignment. It allows users to browse, select, and book travel experiences.
+BookIt is a **fullstack booking platform** built with **Next.js (App Router)**, **TypeScript**, **TailwindCSS**, and **MongoDB (Atlas)**.  
+It allows users to **explore experiences**, view **available dates & time slots**, apply **promo codes**, and **book experiences** end-to-end — from browsing to checkout confirmation.
 
-🚀 Live Application (Hosted on Vercel)
+---
 
-https://YOUR_VERCEL_APP_LINK.vercel.app/
+## 🚀 Tech Stack
 
-(Please replace the link above with your actual Vercel deployment URL)
+| Layer | Technology |
+|--------|-------------|
+| **Frontend** | Next.js 14 (React + TypeScript) |
+| **Styling** | TailwindCSS |
+| **Backend** | Next.js API Routes |
+| **Database** | MongoDB Atlas (Mongoose ODM) |
+| **API Communication** | Native Fetch API |
+| **Deployment** | Vercel |
 
-📸 Project Screenshot
+---
 
-(Please replace the link below with a link to your hosted screenshot. A great way to do this is to upload your screenshot to an "images" folder in your GitHub repo.)
+## ✨ Core Features
 
-✨ Features Implemented
+- 🏝️ **Dynamic Experience Listing** — Fetch experiences from MongoDB.  
+- 📅 **Date & Time Slot Selection** — Book available slots dynamically.  
+- 💳 **Checkout Flow** — Confirm booking details with live price summary.  
+- 🎟️ **Promo Code Validation** — Apply and validate coupons from database.  
+- ✅ **Booking Confirmation Page** — Displays final success message with reference ID.  
+- 📱 **Fully Responsive** — Designed with TailwindCSS for all breakpoints.  
 
-This project fulfills all the core requirements of the assignment:
+---
 
-Home Page: Fetches and displays a responsive grid of all experiences from the database.
+## 🧩 Project Structure
 
-Details Page: A dynamic route (/experience/[id]) that fetches and displays details for a single experience.
+```
 
-Slot Selection: Users can select available dates and time slots. Booked slots are correctly disabled.
+├── src/
+│   ├── app/
+│   │   ├── api/                # All backend routes (Next.js API)
+│   │   │   ├── experiences/    # Experience APIs (GET /experiences, GET /:id)
+│   │   │   ├── bookings/       # Booking creation (POST)
+│   │   │   └── promo/validate  # Promo validation API
+│   │   ├── experience/[id]/    # Experience details page
+│   │   ├── checkout/           # Checkout flow
+│   │   └── success/            # Booking confirmation page
+│   ├── components/             # Reusable UI components
+│   ├── lib/                    # Database connection & models
+│   ├── types/                  # TypeScript interfaces
+│   └── styles/                 # Global styles
 
-Booking API: A transactional backend endpoint (POST /api/bookings) that:
+````
 
-Finds the selected slot.
+---
 
-Checks if it's already booked.
+## ⚙️ Local Setup
 
-Marks the slot as isBooked: true.
+Follow these steps to run the project locally:
 
-Creates a new Booking document in the database.
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/bookit.git
+cd bookit
+````
 
-This logic prevents double-bookings.
+### 2️⃣ Install dependencies
 
-Promo Code API: A backend endpoint (POST /api/promo/validate) that validates promo codes (SAVE10, FLAT100).
-
-Checkout Page: A client-side form to collect user info (name, email) and apply a promo code.
-
-Result Page: A dynamic page (/result?bookingId=...) to confirm a successful booking or show a failure message.
-
-Design Fidelity: The UI is built to exactly match the provided Figma design, including colors, fonts, spacing, and responsive breakpoints.
-
-Loading & Error States: All data-fetching pages handle loading and error states gracefully.
-
-🛠️ Tech Stack
-
-Framework: Next.js (App Router)
-
-Language: TypeScript
-
-Styling: Tailwind CSS
-
-Backend: Next.js API Routes (Serverless Functions)
-
-Database: MongoDB (with Mongoose)
-
-Deployment: Vercel
-
-🏛️ Architectural Decision: Next.js API Routes vs. Express
-
-The assignment requirements specified an Express or NestJS backend. I made a deliberate architectural decision to build the backend using Next.js API Routes instead.
-
-I chose this approach for several key reasons:
-
-Unified Stack: It allowed me to build a high-performance, type-safe application within a single, unified framework.
-
-End-to-End Type Safety: I was able to share TypeScript types (src/types/index.ts) between the frontend components and the backend API, eliminating an entire class of potential bugs.
-
-Simplified Deployment: This architecture enables a single, seamless deployment to Vercel, which serves both the frontend and the serverless backend functions from the same domain.
-
-Modern Workflow: This demonstrates a modern, serverless workflow that leverages the full power of the Next.js framework to achieve all the assignment's goals, including the complex, transactional booking logic.
-
-⚙️ Local Setup & Installation
-
-To run this project locally, please follow these steps:
-
-Clone the repository:
-
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME
-
-
-Install dependencies:
-
+```bash
 npm install
+# or
+yarn install
+```
 
+### 3️⃣ Configure environment variables
 
-Set up environment variables:
-Create a file named .env.local in the root of the project and add your MongoDB connection string:
+Create a `.env.local` file in the root of your project and add the following:
 
-MONGODB_URI="your_mongodb_connection_string_here"
+```bash
+MONGODB_URI="your_mongodb_atlas_connection_string"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+```
 
+> 📝 Use **MongoDB Atlas** for hosting the database.
+> This app is designed for a **remote MongoDB connection**, not local MongoDB.
 
-Run the development server:
+### 4️⃣ Run the development server
 
+```bash
 npm run dev
+# or
+yarn dev
+```
+
+Your app will now be live at 👉 [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🌐 Deployment (Vercel)
+
+This project is designed to deploy directly to **Vercel**:
+
+1. Push your project to GitHub.
+2. Go to [Vercel Dashboard](https://vercel.com).
+3. Import your repository.
+4. Add your environment variable:
+
+   * `MONGODB_URI` — MongoDB Atlas connection string.
+5. Click **Deploy**.
+6. Your live app will be available instantly.
+
+🟢 **Live Demo:** [https://bookit.vercel.app](https://bookit.vercel.app)
+*(Replace this link with your actual deployment URL)*
+
+---
+
+## 🧠 API Overview
+
+| Method | Endpoint               | Description                     |
+| ------ | ---------------------- | ------------------------------- |
+| `GET`  | `/api/experiences`     | Fetch all experiences           |
+| `GET`  | `/api/experiences/:id` | Fetch a single experience by ID |
+| `POST` | `/api/bookings`        | Create a new booking            |
+| `POST` | `/api/promo/validate`  | Validate a promo code           |
+
+---
+
+## 📷 Screenshots
+
+| Page                  | Preview                                      |
+| --------------------- | -------------------------------------------- |
+| 🏠 Home               | ![Home Page](./screenshots/home.png)         |
+| 📄 Experience Details | ![Details Page](./screenshots/details.png)   |
+| 💳 Checkout           | ![Checkout Page](./screenshots/checkout.png) |
+| ✅ Success             | ![Success Page](./screenshots/success.png)   |
+
+---
+
+## 🧑‍💻 Author
+
+**Abdullah**
+💼 Fullstack Developer (MERN + Next.js)
+📧 [abdullah5267383929@gmail.com](mailto:abdullah5267383929@gmail.com)
+🔗 [GitHub](https://github.com/YOUR_USERNAME) | [LinkedIn](https://linkedin.com/in/YOUR_LINKEDIN)
+
+---
+
+## 📝 License
+
+This project is licensed under the **MIT License** — feel free to use and modify it.
+
+---
+
+> *Built with ❤️ using Next.js, TypeScript & MongoDB Atlas.*
 
 
-The application will be available at http://localhost:3000.
