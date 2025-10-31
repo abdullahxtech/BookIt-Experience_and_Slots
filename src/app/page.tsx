@@ -1,16 +1,16 @@
 "use client";
+
 import ExperienceCard from "@/components/ExperienceCard";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { IExperience } from "@/types";
 import { useSearchParams } from "next/navigation";
 
-const Home = () => {
+// ✅ Extracted content logic into its own component (just like Checkout)
+function HomeContent() {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filteredExperiences, setFilteredExperiences] = useState<IExperience[]>(
-    []
-  );
+  const [filteredExperiences, setFilteredExperiences] = useState<IExperience[]>([]);
 
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
@@ -19,7 +19,6 @@ const Home = () => {
     const fetchExperiences = async () => {
       try {
         const response = await fetch("/api/experiences");
-
         if (!response.ok) {
           throw new Error("Failed to fetch experiences from API");
         }
@@ -27,21 +26,20 @@ const Home = () => {
         const data = await response.json();
 
         if (data.success) {
-          setExperiences(data.data); // store the array of experiences in state
+          setExperiences(data.data);
         } else {
           throw new Error(data.error || "API returned an error");
         }
       } catch (err) {
-        setError((err as Error).message); // store any error message
+        setError((err as Error).message);
       } finally {
-        setIsLoading(false); // stop loading, whether we succeeded or failed
+        setIsLoading(false);
       }
     };
 
     fetchExperiences();
-  }, []); 
+  }, []);
 
-  // filter whenever the search query or experiences change
   useEffect(() => {
     if (!searchQuery) {
       setFilteredExperiences(experiences);
@@ -53,7 +51,6 @@ const Home = () => {
     }
   }, [searchQuery, experiences]);
 
-  // handle the loading state
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -62,7 +59,6 @@ const Home = () => {
     );
   }
 
-  // handle the error state
   if (error) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -73,7 +69,6 @@ const Home = () => {
 
   return (
     <section className="container mx-auto px-4 py-10">
-      {/* show search query if active */}
       {searchQuery && (
         <p className="text-neutral-600 mb-4">
           Showing results for{" "}
@@ -94,6 +89,19 @@ const Home = () => {
       </div>
     </section>
   );
-};
+}
 
-export default Home;
+// ✅ Export default with Suspense wrapper
+export default function Home() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-lg text-neutral-600">Loading page...</p>
+        </div>
+      }
+    >
+      <HomeContent />
+    </Suspense>
+  );
+}
