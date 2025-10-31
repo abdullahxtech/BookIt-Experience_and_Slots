@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-// ✅ Extracted component to work safely inside Suspense
 function ResultContent() {
   const searchParams = useSearchParams();
   const refId = searchParams.get("ref") || "N/A";
@@ -22,7 +21,6 @@ function ResultContent() {
         />
       </div>
 
-      {/* confirmation Text */}
       <h2 className="w-fit h-10 font-medium text-[32px] leading-10 text-[#161616]">
         Booking Confirmed
       </h2>
@@ -30,7 +28,6 @@ function ResultContent() {
         Ref ID: {refId}
       </p>
 
-      {/* back to Home button */}
       <Link
         href="/"
         className="w-[138px] h-9 rounded-sm px-4 py-2 bg-[#E3E3E3] text-[#656565] font-normal text-[16px] leading-5"
@@ -41,7 +38,6 @@ function ResultContent() {
   );
 }
 
-// ✅ Wrapped in Suspense for hydration safety
 export default function ResultPage() {
   return (
     <Suspense

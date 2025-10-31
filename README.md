@@ -106,8 +106,7 @@ This project is designed to deploy directly to **Vercel**:
 5. Click **Deploy**.
 6. Your live app will be available instantly.
 
-🟢 **Live Demo:** [https://bookit.vercel.app](https://bookit.vercel.app)
-*(Replace this link with your actual deployment URL)*
+🟢 **Live Demo:** [https://book-it-experience-and-slots.vercel.app/](https://book-it-experience-and-slots.vercel.app/)
 
 ---
 
@@ -126,10 +125,10 @@ This project is designed to deploy directly to **Vercel**:
 
 | Page                  | Preview                                      |
 | --------------------- | -------------------------------------------- |
-| 🏠 Home               | ![Home Page](./screenshots/home.png)         |
-| 📄 Experience Details | ![Details Page](./screenshots/details.png)   |
-| 💳 Checkout           | ![Checkout Page](./screenshots/checkout.png) |
-| ✅ Success             | ![Success Page](./screenshots/success.png)   |
+| 🏠 Home               | ![Home Page](./public/screenshots/homepage.png)         |
+| 📄 Experience Details | ![Details Page](./public/screenshots/DetailsPage.png)   |
+| 💳 Checkout           | ![Checkout Page](./public/screenshots/checkout.png) |
+| ✅ Success             | ![Success Page](./public/screenshots/result.png)   |
 
 ---
 
@@ -137,7 +136,7 @@ This project is designed to deploy directly to **Vercel**:
 
 **Abdullah**
 💼 Fullstack Developer (MERN + Next.js)
-📧 [abdullah5267383929@gmail.com](mailto:abdullah5267383929@gmail.com)
+📧 [abdullah195307@gmail.com](mailto:abdullah195307@gmail.com)
 🔗 [GitHub](https://github.com/YOUR_USERNAME) | [LinkedIn](https://linkedin.com/in/YOUR_LINKEDIN)
 
 ---

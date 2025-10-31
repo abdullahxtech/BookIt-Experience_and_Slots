@@ -5,7 +5,6 @@ import React, { Suspense, useEffect, useState } from "react";
 import { IExperience } from "@/types";
 import { useSearchParams } from "next/navigation";
 
-// ✅ Extracted content logic into its own component (just like Checkout)
 function HomeContent() {
   const [experiences, setExperiences] = useState<IExperience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +90,6 @@ function HomeContent() {
   );
 }
 
-// ✅ Export default with Suspense wrapper
 export default function Home() {
   return (
     <Suspense

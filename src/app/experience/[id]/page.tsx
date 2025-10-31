@@ -15,7 +15,6 @@ const ExperienceDetailsPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // keep selection state
   const [selectedDateId, setSelectedDateId] = useState<string | null>(null);
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
@@ -33,7 +32,6 @@ const ExperienceDetailsPage = () => {
         }
 
         setExperience(data.data);
-        // for choosing first date and first available slot (if any)
         if (data.data?.availableDates?.length > 0) {
           const firstDate = data.data.availableDates[0];
           setSelectedDateId(firstDate._id ?? firstDate.date);
