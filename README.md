@@ -125,10 +125,10 @@ This project is designed to deploy directly to **Vercel**:
 
 |                   | 
 | --------------------- | 
-| 🏠 Home               | (Home Page)[/screenshots/HomePage.png]
-| 📄 Experience Details | 
-| 💳 Checkout           | 
-| ✅ Success             | 
+| 🏠 Home               | (HomePage)[./public/screenshots/HomePage.png] |
+| 📄 Experience Details | (HomePage)[./public/screenshots/HomePage.png] |
+| 💳 Checkout           | (HomePage)[./public/screenshots/HomePage.png] | 
+| ✅ Success             | (HomePage)[./public/screenshots/HomePage.png] | 
 
 ---
 
