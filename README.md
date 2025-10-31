@@ -125,7 +125,7 @@ This project is designed to deploy directly to **Vercel**:
 
 |                   | 
 | --------------------- | 
-| 🏠 Home               | 
+| 🏠 Home               | (Home Page)[/screenshots/HomePage.png]
 | 📄 Experience Details | 
 | 💳 Checkout           | 
 | ✅ Success             | 
