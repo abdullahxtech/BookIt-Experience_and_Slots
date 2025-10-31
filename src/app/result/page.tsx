@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-const ResultPage = () => {
+// ✅ Extracted component to work safely inside Suspense
+function ResultContent() {
   const searchParams = useSearchParams();
   const refId = searchParams.get("ref") || "N/A";
 
@@ -13,7 +15,7 @@ const ResultPage = () => {
       {/* success icon */}
       <div className="w-20 h-20">
         <Image
-          src="/success-check.svg" 
+          src="/success-check.svg"
           alt="success"
           width={80}
           height={80}
@@ -37,6 +39,19 @@ const ResultPage = () => {
       </Link>
     </section>
   );
-};
+}
 
-export default ResultPage;
+// ✅ Wrapped in Suspense for hydration safety
+export default function ResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-lg text-neutral-600">Loading result...</p>
+        </div>
+      }
+    >
+      <ResultContent />
+    </Suspense>
+  );
+}
