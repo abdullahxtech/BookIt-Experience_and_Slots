@@ -57,8 +57,8 @@ Follow these steps to run the project locally:
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/bookit.git
-cd bookit
+git clone https://github.com/abdullahxtech/bookIt.git
+cd booklt
 ````
 
 ### 2️⃣ Install dependencies
